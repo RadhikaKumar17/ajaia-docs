@@ -7,7 +7,7 @@ Create rich-text documents, import files, and share them with teammates. Owned
 and shared documents are clearly separated, and everything persists across
 refreshes.
 
-> **Live demo:** _add your deployed URL here after deploying (see [Deployment](#deployment))_
+> **Live demo:** _add your deployed URL here after deploying (see [Deployment](https://splendorous-gelato-0b8844.netlify.app/login))_
 >
 > **Demo users (no passwords):** `alice@ajaia.dev`, `bob@ajaia.dev`, `carol@ajaia.dev`
 
@@ -15,14 +15,14 @@ refreshes.
 
 ## Features
 
-| Area | What's implemented |
-| --- | --- |
-| **Documents** | Create, rename, edit, delete, save & reopen. Autosaves ~0.8s after you stop typing, with a live "Saving… / All changes saved" indicator. |
-| **Rich text** | Bold, italic, underline, H1–H3 + normal text, bullet & numbered lists, block quotes, undo/redo. Built on [TipTap](https://tiptap.dev). Content is stored as sanitized HTML. |
-| **File upload** | Upload a **`.txt`**, **`.md`**, or **`.docx`** file → it becomes a new editable document. `.docx` is parsed with [mammoth](https://github.com/mwilliamson/mammoth.js); Markdown and text are converted to formatted HTML. |
-| **Sharing** | Every document has an **owner**. The owner can grant another user **edit** or **view** access by email. The dashboard clearly separates **Owned by me** vs **Shared with me**, with a role badge. View-only users get a read-only editor. |
-| **Persistence** | SQLite via [Prisma](https://www.prisma.io). Documents and shares survive refresh; formatting is preserved as HTML. |
-| **Quality** | Input validation + error handling on every API route, HTML sanitization against stored XSS, and 29 automated unit tests. |
+| Area            | What's implemented                                                                                                                                                                                                                        |
+| --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Documents**   | Create, rename, edit, delete, save & reopen. Autosaves ~0.8s after you stop typing, with a live "Saving… / All changes saved" indicator.                                                                                                  |
+| **Rich text**   | Bold, italic, underline, H1–H3 + normal text, bullet & numbered lists, block quotes, undo/redo. Built on [TipTap](https://tiptap.dev). Content is stored as sanitized HTML.                                                               |
+| **File upload** | Upload a **`.txt`**, **`.md`**, or **`.docx`** file → it becomes a new editable document. `.docx` is parsed with [mammoth](https://github.com/mwilliamson/mammoth.js); Markdown and text are converted to formatted HTML.                 |
+| **Sharing**     | Every document has an **owner**. The owner can grant another user **edit** or **view** access by email. The dashboard clearly separates **Owned by me** vs **Shared with me**, with a role badge. View-only users get a read-only editor. |
+| **Persistence** | SQLite via [Prisma](https://www.prisma.io). Documents and shares survive refresh; formatting is preserved as HTML.                                                                                                                        |
+| **Quality**     | Input validation + error handling on every API route, HTML sanitization against stored XSS, and 29 automated unit tests.                                                                                                                  |
 
 ### Supported upload types
 
@@ -62,8 +62,6 @@ npm run dev
 Open **http://localhost:3000** and sign in as any demo user.
 
 > The `.env` file ships with `DATABASE_URL="file:./dev.db"` so local setup needs
-> zero configuration. If you prefer a one-liner, `npm run db:reset` recreates and
-> reseeds the database at any time.
 
 ### Run the tests
 
@@ -82,7 +80,7 @@ and file-import conversion.
 2. Open a document → click **Share** → enter `bob@ajaia.dev` → choose **Can edit** → **Share**.
 3. Open a **second browser window** (or an incognito window) and sign in as **Bob**.
 4. Bob sees the document under **Shared with me** and can edit it.
-5. Sign in as **Carol** — she does **not** see the document, and a direct link returns *"You don't have access."*
+5. Sign in as **Carol** — she does **not** see the document, and a direct link returns _"You don't have access."_
 
 The seed data already shares **"Q3 Planning"** (owned by Alice) with Bob, so the
 shared-document view is populated out of the box.
