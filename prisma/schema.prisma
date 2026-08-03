@@ -1,14 +1,15 @@
 // Prisma schema for Ajaia Docs.
-// Local development uses SQLite. For production, change `provider` to
-// "postgresql" and point DATABASE_URL at a persistent Postgres instance.
+// Uses Neon Postgres. DATABASE_URL is the pooled connection (runtime),
+// DIRECT_URL is the unpooled connection (used by Prisma Migrate).
 
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model User {
