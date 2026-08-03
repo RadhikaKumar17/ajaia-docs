@@ -1,0 +1,53 @@
+// Prisma schema for Ajaia Docs.
+// Local development uses SQLite. For production, change `provider` to
+// "postgresql" and point DATABASE_URL at a persistent Postgres instance.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String
+  createdAt DateTime @default(now())
+
+  ownedDocuments Document[] @relation("OwnedDocuments")
+  shares         Share[]
+}
+
+model Document {
+  id        String   @id @default(cuid())
+  title     String
+  // Rich-text content stored as sanitized HTML produced by the TipTap editor.
+  content   String   @default("")
+  ownerId   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  owner  User    @relation("OwnedDocuments", fields: [ownerId], references: [id], onDelete: Cascade)
+  shares Share[]
+
+  @@index([ownerId])
+}
+
+// A Share grants a (non-owner) user access to a document.
+model Share {
+  id         String   @id @default(cuid())
+  documentId String
+  userId     String
+  // "edit" or "view" — role-based access.
+  role       String   @default("edit")
+  createdAt  DateTime @default(now())
+
+  document Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([documentId, userId])
+  @@index([userId])
+}
